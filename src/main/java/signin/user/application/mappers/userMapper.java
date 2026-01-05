@@ -1,4 +1,4 @@
-﻿package signin.user.application.mappers;
+package signin.user.application.mappers;
 
 import org.springframework.stereotype.Component;
 import signin.user.adapters.out.jpaEntities.userJpa;
@@ -26,7 +26,9 @@ public class userMapper {
     }
     public user JpaToEntity (userJpa jp) {
         user user = new user();
-        user.setId(jp.getId());
+        if(jp.getId()!=null){
+            user.setId(jp.getId());
+        }
         user.setName(jp.getName());
         user.setEmail(jp.getEmail());
         user.setPassword(jp.getPassword());

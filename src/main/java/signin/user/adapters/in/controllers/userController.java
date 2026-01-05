@@ -1,13 +1,17 @@
-﻿package signin.user.adapters.in.controllers;
+package signin.user.adapters.in.controllers;
 
 import jakarta.validation.Valid;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import signin.user.application.dtos.httpResponse;
 import signin.user.application.dtos.userRequest;
 import signin.user.application.services.userService;
+import signin.user.core.entity.user;
 import signin.user.core.interfaces.userUseCase;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -16,27 +20,29 @@ public class userController {
     private userUseCase userUseCase ;
 
     @GetMapping
-    public ResponseEntity<httpResponse> getUsers() {
-        userUseCase.getAllUsers();
-        return ResponseEntity.ok().body("success");
+    public ResponseEntity<List<user>> getUsers() {
+        return ResponseEntity.ok().body(userUseCase.getAllUsers());
     }
-    @GetMapping
-    public ResponseEntity<httpResponse> getUserById(@RequestParam Long id) {
-        userUseCase.getUser(id);
-        return ResponseEntity.ok().body("success");
+    @GetMapping("/{id}")
+    public ResponseEntity<user> getUserById(@PathVariable Long id) {
+
+        return ResponseEntity.ok().body(userUseCase.getUser(id));
     }
     @PostMapping
-    public ResponseEntity<httpResponse> addUser(@Valid @RequestBody userRequest user) {
+    public ResponseEntity<Void> addUser(@Valid @RequestBody userRequest user) {
         userUseCase.create(user);
-        return ResponseEntity.ok().body("success");
+        return ResponseEntity.ok().build();
+
     }
-    @PutMapping
-    public ResponseEntity<httpResponse> updateUser(@RequestBody userRequest user, @RequestParam Long id) {
-        userUseCase.update(user,id);
-        return ResponseEntity.ok().body("success");
+    @PatchMapping("/{id}")
+    public ResponseEntity<Void> updateUser(@RequestBody userRequest user, @PathVariable Long id) {
+        userUseCase.update(user, id);
+        return ResponseEntity.ok().build();
+
     }
-    @DeleteMapping
-    public ResponseEntity<httpResponse> deleteUser(@RequestParam Long id) {
-        return ResponseEntity.ok().body("success");
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        userUseCase.delete(id);
+        return ResponseEntity.ok().build();
     }
 }

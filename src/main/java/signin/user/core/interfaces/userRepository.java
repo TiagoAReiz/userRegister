@@ -1,4 +1,4 @@
-﻿package signin.user.core.interfaces;
+package signin.user.core.interfaces;
 
 import signin.user.core.entity.user;
 

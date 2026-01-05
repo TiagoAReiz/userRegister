@@ -1,8 +1,8 @@
-﻿package signin.user.core.exceptions;
+package signin.user.core.exceptions;
 
 public class UserNotFoundException extends RuntimeException{
     public UserNotFoundException(){
-        super("Usuário não encontrado");
+        super("Usuario nao encontrado");
     }
     public UserNotFoundException(String message){
         super(message);

@@ -1,4 +1,4 @@
-﻿package signin.user.application.services;
+package signin.user.application.services;
 
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
@@ -27,9 +27,7 @@ public class userService implements userUseCase {
     @Override
     public user getUser(Long id) {
         user user = userRepository.findById(id);
-        if (user == null) {
-            throw new UserNotFoundException();
-        }
+
         return user;
     }
 

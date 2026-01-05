@@ -1,4 +1,4 @@
-﻿package signin.user.adapters;
+package signin.user.adapters;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +10,7 @@ import signin.user.core.exceptions.UserAlreadyExistsException;
 import signin.user.core.exceptions.UserNotFoundException;
 
 @ControllerAdvice
-public class exceptionHandler extends ResponseEntityExceptionHandler {
+public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
 
     @ExceptionHandler(UserNotFoundException.class)

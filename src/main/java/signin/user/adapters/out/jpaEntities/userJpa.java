@@ -1,4 +1,4 @@
-﻿package signin.user.adapters.out.jpaEntities;
+package signin.user.adapters.out.jpaEntities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

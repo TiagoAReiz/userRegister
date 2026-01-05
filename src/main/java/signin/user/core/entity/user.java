@@ -1,4 +1,4 @@
-﻿package signin.user.core.entity;
+package signin.user.core.entity;
 
 
 public class user {

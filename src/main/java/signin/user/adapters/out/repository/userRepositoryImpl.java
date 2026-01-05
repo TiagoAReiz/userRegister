@@ -1,10 +1,12 @@
-﻿package signin.user.adapters.out.repository;
+package signin.user.adapters.out.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Component;
+import signin.user.adapters.out.jpaEntities.userJpa;
 import signin.user.application.mappers.userMapper;
 import signin.user.core.entity.user;
+import signin.user.core.exceptions.UserNotFoundException;
 import signin.user.core.interfaces.userRepository;
 
 import java.util.List;
@@ -19,11 +21,15 @@ public class userRepositoryImpl implements userRepository {
 
     @Override
     public user findById(Long id) {
-        return userMapper.JpaToEntity(userJpaRepository.findById(id).orElseThrow());
+        return userMapper.JpaToEntity(userJpaRepository.findById(id).orElseThrow(UserNotFoundException::new));
     }
     @Override
     public user findByEmail(String email) {
-        return userMapper.JpaToEntity(userJpaRepository.findByEmail(email));
+        userJpa user = userJpaRepository.findByEmail(email);
+        if (user == null) {
+            return null;
+        }
+        return userMapper.JpaToEntity(user);
     }
 
     @Override
